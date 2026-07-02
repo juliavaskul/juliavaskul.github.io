@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Julia Vaskul</title>
+<meta name="description" content="Start a project with Julia Vaskul — AI creative producer for fashion, beauty, and commercial campaigns.">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="site-nav scrolled" id="nav">
+  <a class="nav-brand" href="index.html">Julia Vaskul</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="work.html">Work</a></li>
+    <li><a href="deep-dive.html">Deep Dive</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <button class="nav-toggle" aria-label="Menu">☰</button>
+</nav>
+
+<section class="contact-wrap">
+  <h1>Start a project</h1>
+  <p>Fashion, beauty, or commercial — tell me a little about what you have in mind.</p>
+
+  <!-- Replace YOUR_FORM_ID with your Formspree endpoint after registering at formspree.io -->
+  <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <div class="form-field">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+    <div class="form-field">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+    <div class="form-field">
+      <label for="message">Message</label>
+      <textarea id="message" name="message" required></textarea>
+    </div>
+    <button type="submit" class="submit-btn">Send message</button>
+  </form>
+
+  <p class="contact-alt">Or reach out directly on <a href="https://www.linkedin.com/in/julia-vaskul-b84625381" target="_blank" rel="noopener">LinkedIn</a>.</p>
+</section>
+
+<footer class="site-footer">
+  <span>© 2026 Julia Vaskul — Basque Breeze</span>
+  <div class="footer-social">
+    <a href="https://www.linkedin.com/in/julia-vaskul-b84625381" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.behance.net/juliavaskul1" target="_blank" rel="noopener">Behance</a>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
