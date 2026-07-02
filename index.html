@@ -38,9 +38,9 @@
 </nav>
 
 <header class="hero">
-  <iframe class="yt-embed" style="pointer-events:none;"
-    src="https://www.youtube.com/embed/J1Bmpbz_C78?autoplay=1&mute=1&loop=1&playlist=J1Bmpbz_C78&controls=0&showinfo=0&modestbranding=1&playsinline=1"
-    title="Chanel Cruise 2026/27 — hero film" allow="autoplay; encrypted-media"></iframe>
+  <video autoplay muted loop playsinline>
+    <source src="visuals/hero-portrait.mp4" type="video/mp4">
+  </video>
   <div class="hero-content">
     <h1 class="hero-title">AI-Generated Concept Campaigns</h1>
     <p class="hero-sub">Fashion • Commercial • Beauty</p>
@@ -49,10 +49,14 @@
 </header>
 
 <section class="bio-strip">
-  <p>Julia Vaskul is the founder of Basque Breeze — an AI visual production studio crafting cinematic concept campaigns for fashion, beauty, and luxury. Every project is directed end to end: brand research, art direction, generation, edit.</p>
+  <p class="bio-lede">I'm Julia Vaskul. I build cinematic campaign concepts for fashion, beauty, and commercial brands.</p>
+  <p class="bio-support">For teams who need a fully art-directed visual without a full production crew.</p>
 </section>
 
 <main class="acts">
+
+  <div class="projects-carousel">
+    <div class="projects-track">
 
   <!-- 1. Chanel Cruise 2026/27 -->
   <section class="act" data-type="video">
@@ -67,9 +71,8 @@
         </button>
       </div>
       <div class="act-text">
-        <div class="act-index">01 — Heritage &amp; Narrative</div>
         <h2 class="act-title">Chanel Cruise 2026/27</h2>
-        <p class="act-caption">A black-and-white study of the Atlantic coast Chanel chose as its stage — no models, no product, only landscape and inherited weight.</p>
+        <p class="act-caption">The Atlantic coast as the stage for Chanel's new chapter — Cruise 2026/27, told through landscape, heritage, and emotion.</p>
       </div>
     </div>
   </section>
@@ -87,7 +90,6 @@
         </button>
       </div>
       <div class="act-text">
-        <div class="act-index">02 — Heritage &amp; Narrative</div>
         <h2 class="act-title">Chanel Allure Homme Édition Blanche</h2>
         <p class="act-caption">Two figures, a luxury hotel room, a silver cloche concealing a single answer. My personal vision of Allure Homme Édition Blanche.</p>
       </div>
@@ -102,12 +104,11 @@
           <svg viewBox="0 0 24 24" fill="none"><path d="M4 6.5C4 5.12 5.4 4.2 6.66 4.76L18.5 10.26C19.9 10.9 19.9 13.1 18.5 13.74L6.66 19.24C5.4 19.8 4 18.88 4 17.5V6.5Z" fill="#0a0a0a"/></svg>
         </div>
         <button class="play-trigger" data-yt="jOUg-TReeCo" aria-label="Play Panthère">
-          <img src="https://img.youtube.com/vi/jOUg-TReeCo/hqdefault.jpg" alt="AI-generated La Panthère campaign concept — cinematic film inspired by Chanel's iconic panther motif, Haussmann apartment interior, red velvet and gold tones">
+          <img src="visuals/heritage-narrative/panthere/cover.jpg" alt="AI-generated La Panthère campaign concept — cinematic film inspired by Chanel's iconic panther motif, Haussmann apartment interior, red velvet and gold tones">
           <span class="play-circle"><svg viewBox="0 0 24 24"><polygon points="6,4 20,12 6,20"/></svg></span>
         </button>
       </div>
       <div class="act-text">
-        <div class="act-index">03 — Heritage &amp; Narrative</div>
         <h2 class="act-title">Panthère</h2>
         <p class="act-caption">Deep red velvet, black fur, gold catching the low afternoon light through Haussmann windows — a woman and a panther share the same stillness, as if the room had been waiting for both of them. "La Panthère" — AI-generated video inspired by the iconic brand.</p>
       </div>
@@ -135,7 +136,6 @@
         </div>
       </div>
       <div class="act-text">
-        <div class="act-index">04 — Beauty &amp; Product</div>
         <h2 class="act-title">Typology Reimagined</h2>
         <p class="act-caption">An editorial campaign for Typology, built entirely with AI generation — extending the brand's language of radical transparency into images that haven't been created before.</p>
         <a class="act-cta" href="deep-dive.html">Read the case study →</a>
@@ -164,7 +164,6 @@
         </div>
       </div>
       <div class="act-text">
-        <div class="act-index">05 — Fashion Editorial</div>
         <h2 class="act-title">Still Water</h2>
         <p class="act-caption">A woman in a structured terracotta gown, alone in a woven boat on a perfectly still lake. Fog. Pampas grass. The reflection holds longer than the moment. Silence as a creative choice. Stillness as direction.</p>
       </div>
@@ -192,12 +191,22 @@
         </div>
       </div>
       <div class="act-text">
-        <div class="act-index">06 — Playful Luxury</div>
         <h2 class="act-title">Jacquemus "Poireau/Maïs"</h2>
         <p class="act-caption">Croc-embossed clutches placed among olive trees, corn, and lavender — a Provençal still life where the bags exist as naturally as the wheat, as natural to the scene as anything grown there.</p>
       </div>
     </div>
   </section>
+
+    </div><!-- /projects-track -->
+
+    <button class="projects-arrow projects-prev" aria-label="Previous project">
+      <svg width="16" height="16" viewBox="0 0 24 24"><polyline points="15,5 8,12 15,19" fill="none" stroke="#0a0a0a" stroke-width="2"/></svg>
+    </button>
+    <button class="projects-arrow projects-next" aria-label="Next project">
+      <svg width="16" height="16" viewBox="0 0 24 24"><polyline points="9,5 16,12 9,19" fill="none" stroke="#0a0a0a" stroke-width="2"/></svg>
+    </button>
+    <div class="projects-dots"></div>
+  </div><!-- /projects-carousel -->
 
 </main>
 

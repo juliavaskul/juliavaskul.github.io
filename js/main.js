@@ -104,6 +104,44 @@ document.addEventListener('DOMContentLoaded', () => {
     highlight();
   }
 
+  /* ---------- Projects outer carousel ---------- */
+  const projCarousel = document.querySelector('.projects-carousel');
+  if (projCarousel) {
+    const track = projCarousel.querySelector('.projects-track');
+    const slides = [...track.querySelectorAll(':scope > .act')];
+    const dotsWrap = projCarousel.querySelector('.projects-dots');
+    const prevBtn = projCarousel.querySelector('.projects-prev');
+    const nextBtn = projCarousel.querySelector('.projects-next');
+    let current = 0;
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement('span');
+      if (i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    });
+
+    const goTo = (idx) => {
+      current = Math.max(0, Math.min(idx, slides.length - 1));
+      track.style.transform = `translateX(-${current * 100}%)`;
+      dotsWrap.querySelectorAll('span').forEach((d, i) => d.classList.toggle('active', i === current));
+    };
+
+    prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn.addEventListener('click', () => goTo(current + 1));
+
+    let touchStartX = 0, touchTarget = null;
+    track.addEventListener('touchstart', e => {
+      touchStartX = e.touches[0].clientX;
+      touchTarget = e.target;
+    }, { passive: true });
+    track.addEventListener('touchend', e => {
+      if (touchTarget && touchTarget.closest('.carousel')) return;
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 50) goTo(current + (dx < 0 ? 1 : -1));
+    }, { passive: true });
+  }
+
   /* ---------- Deep Dive tabs ---------- */
   const ddTabs = document.querySelectorAll('.dd-tabs button');
   if (ddTabs.length) {

@@ -344,3 +344,46 @@ button{ font-family:var(--sans); cursor:pointer; }
 a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
   outline:2px solid var(--black); outline-offset:2px;
 }
+
+/* ---------- Bio lede / support ---------- */
+.bio-lede{
+  font-family:var(--display); font-size:clamp(1.3rem,2.8vw,1.9rem);
+  line-height:1.4; font-weight:300; margin-bottom:1.1rem;
+}
+.bio-support{
+  font-size:0.7rem; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--gray-500); font-weight:500;
+}
+
+/* ---------- Projects outer carousel ---------- */
+.projects-carousel{
+  position:relative; width:100%; overflow:hidden;
+  border-top:1px solid var(--line);
+}
+.projects-track{
+  display:flex;
+  transition:transform 0.55s cubic-bezier(.22,.61,.36,1);
+}
+.projects-track .act{
+  flex:0 0 100%; width:100%; min-height:100svh; border-bottom:none;
+}
+.projects-arrow{
+  position:absolute; top:50%; transform:translateY(-50%); z-index:10;
+  width:44px; height:44px; border-radius:50%;
+  background:rgba(255,255,255,0.9); border:1px solid var(--line);
+  display:flex; align-items:center; justify-content:center;
+  transition:background .2s var(--ease);
+}
+.projects-arrow:hover{ background:var(--white); }
+.projects-prev{ left:2vw; }
+.projects-next{ right:2vw; }
+.projects-dots{
+  position:absolute; bottom:28px; left:0; right:0; z-index:10;
+  display:flex; gap:8px; justify-content:center; pointer-events:none;
+}
+.projects-dots span{
+  width:6px; height:6px; border-radius:50%;
+  background:var(--gray-300); cursor:pointer; pointer-events:auto;
+  transition:background .2s;
+}
+.projects-dots span.active{ background:var(--black); }
