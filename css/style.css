@@ -3,7 +3,7 @@
    Cold minimalism. Black & white. Editorial.
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap');
 
 :root{
   --black:#0a0a0a;
@@ -14,7 +14,7 @@
   --gray-700:#4a4a47;
   --line: rgba(10,10,10,0.12);
   --line-invert: rgba(255,255,255,0.25);
-  --display: 'Fraunces', 'Times New Roman', serif;
+  --display: 'Bodoni Moda', 'Times New Roman', serif;
   --sans: 'Inter', -apple-system, sans-serif;
   --ease: cubic-bezier(.22,.61,.36,1);
 }
