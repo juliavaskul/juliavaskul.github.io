@@ -4,16 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Sticky nav shrink on scroll ---------- */
   const nav = document.querySelector('.site-nav');
-  const subnav = document.querySelector('.subnav');
   if (nav) {
     const onScroll = () => {
-      if (window.scrollY > 40) {
-        nav.classList.add('scrolled');
-        if (subnav) subnav.style.top = '48px';
-      } else {
-        nav.classList.remove('scrolled');
-        if (subnav) subnav.style.top = '64px';
-      }
+      if (window.scrollY > 40) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
@@ -87,9 +81,9 @@ document.addEventListener('DOMContentLoaded', () => {
         filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         const type = btn.dataset.filter;
-        document.querySelectorAll('.work-card[data-type]').forEach(card => {
-          if (type === 'all' || card.dataset.type === type) card.style.display = '';
-          else card.style.display = 'none';
+        document.querySelectorAll('.act[data-type]').forEach(act => {
+          if (type === 'all' || act.dataset.type === type) act.style.display = '';
+          else act.style.display = 'none';
         });
       });
     });
