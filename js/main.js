@@ -4,10 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Sticky nav shrink on scroll ---------- */
   const nav = document.querySelector('.site-nav');
+  const subnav = document.querySelector('.subnav');
   if (nav) {
     const onScroll = () => {
-      if (window.scrollY > 40) nav.classList.add('scrolled');
-      else nav.classList.remove('scrolled');
+      const scrolled = window.scrollY > 40;
+      nav.classList.toggle('scrolled', scrolled);
+      if (subnav) subnav.style.top = scrolled ? '48px' : '64px';
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
@@ -73,35 +75,53 @@ document.addEventListener('DOMContentLoaded', () => {
     next?.addEventListener('click', () => track.scrollBy({ left: track.clientWidth, behavior: 'smooth' }));
   });
 
-  /* ---------- Work page: media filter (All / Video / Photo) ---------- */
-  const filterBtns = document.querySelectorAll('.media-filter button');
-  if (filterBtns.length) {
+  /* ---------- Work page: category tabs + media filter ---------- */
+  const subnavLinks = document.querySelectorAll('.subnav a[data-cat]');
+  const filterBtns  = document.querySelectorAll('.media-filter button');
+  const catHeadings = document.querySelectorAll('.category-heading[id]');
+
+  if (subnavLinks.length && catHeadings.length) {
+    // Map each .act to its parent category id using DOM order
+    const actCat = new Map();
+    catHeadings.forEach(h => {
+      let el = h.nextElementSibling;
+      while (el && !el.classList.contains('category-heading')) {
+        if (el.classList.contains('act')) actCat.set(el, h.id);
+        el = el.nextElementSibling;
+      }
+    });
+
+    let activeCat    = 'heritage-narrative';
+    let activeFilter = 'all';
+
+    function applyFilters() {
+      actCat.forEach((cat, act) => {
+        const show = cat === activeCat && (activeFilter === 'all' || act.dataset.type === activeFilter);
+        act.style.display = show ? '' : 'none';
+      });
+    }
+
+    subnavLinks.forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        activeCat    = a.dataset.cat;
+        activeFilter = 'all';
+        subnavLinks.forEach(l => l.classList.toggle('active', l === a));
+        filterBtns.forEach(b => b.classList.toggle('active', b.dataset.filter === 'all'));
+        applyFilters();
+      });
+    });
+
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        const type = btn.dataset.filter;
-        document.querySelectorAll('.act[data-type]').forEach(act => {
-          if (type === 'all' || act.dataset.type === type) act.style.display = '';
-          else act.style.display = 'none';
-        });
+        activeFilter = btn.dataset.filter;
+        applyFilters();
       });
     });
-  }
 
-  /* ---------- Work page: subnav smooth scroll + active highlight ---------- */
-  const subnavLinks = document.querySelectorAll('.subnav a');
-  if (subnavLinks.length) {
-    const sections = Array.from(subnavLinks).map(a => document.querySelector(a.getAttribute('href')));
-    const highlight = () => {
-      let current = sections[0];
-      sections.forEach(sec => {
-        if (sec && window.scrollY >= sec.offsetTop - 140) current = sec;
-      });
-      subnavLinks.forEach(a => a.classList.toggle('active', document.querySelector(a.getAttribute('href')) === current));
-    };
-    window.addEventListener('scroll', highlight, { passive: true });
-    highlight();
+    applyFilters(); // init: show only Heritage & Narrative
   }
 
   /* ---------- Projects outer carousel ---------- */
