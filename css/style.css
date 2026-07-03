@@ -3,7 +3,7 @@
    Cold minimalism. Black & white. Editorial.
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;1,400&family=Fraunces:ital,wght@1,300&family=Inter:wght@300;400;500&display=swap');
 
 :root{
   --black:#0a0a0a;
@@ -77,7 +77,7 @@ button{ font-family:var(--sans); cursor:pointer; }
   display:flex; gap:2.4rem; list-style:none; margin:0; padding:0;
 }
 .nav-links a{
-  font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; font-weight:500;
+  font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; font-weight:700;
   position:relative; padding-bottom:6px;
 }
 .nav-links a.active::after{
@@ -85,12 +85,13 @@ button{ font-family:var(--sans); cursor:pointer; }
 }
 .nav-toggle{ display:none; background:none; border:none; color:inherit; }
 
-.subnav{
+.top-filters{
   position:sticky; top:64px; z-index:90;
   transition:top .3s ease;
+}
+.subnav{
   display:flex; gap:2.2rem; justify-content:center; flex-wrap:wrap;
   padding:18px 5vw; background:var(--white); border-bottom:1px solid var(--line);
-  margin-top:0;
 }
 .subnav a{
   font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; font-weight:500; color:var(--gray-700);
@@ -152,10 +153,11 @@ button{ font-family:var(--sans); cursor:pointer; }
 
 /* ---------- Bio strip (Home, under hero) ---------- */
 .bio-strip{
-  padding:9vh 5vw; max-width:70ch; margin:0 auto; text-align:center;
+  padding:9vh 5vw; max-width:860px; margin:0 auto;
 }
 .bio-strip p{
   font-family:var(--display); font-size:clamp(1.1rem,2.2vw,1.5rem); line-height:1.5; font-weight:300;
+  text-align:center;
 }
 .bio-strip a{ border-bottom:1px solid var(--black); }
 
@@ -211,6 +213,7 @@ button{ font-family:var(--sans); cursor:pointer; }
 }
 .carousel-track::-webkit-scrollbar{ display:none; }
 .carousel-track img{ flex:0 0 100%; width:100%; height:100%; object-fit:cover; scroll-snap-align:start; }
+.carousel-track img.img-contain{ object-fit:contain; background:var(--white); }
 .carousel-arrow{
   position:absolute; top:50%; transform:translateY(-50%); z-index:3;
   width:38px; height:38px; border-radius:50%; border:1px solid var(--line-invert);
@@ -270,6 +273,9 @@ button{ font-family:var(--sans); cursor:pointer; }
 .dd-images{ display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; }
 .dd-images.single{ grid-template-columns:1fr; max-width:520px; margin:0 auto; }
 .dd-images img{ width:100%; aspect-ratio:4/5; object-fit:cover; }
+@media (min-width:700px){ .dd-images--3col{ grid-template-columns:repeat(3,1fr); } }
+#photo-case .dd-block p{ max-width:none; text-align:justify; hyphens:auto; -webkit-hyphens:auto; }
+#video-pipeline .dd-block p{ max-width:none; text-align:justify; hyphens:auto; -webkit-hyphens:auto; }
 
 .pipeline-step{
   display:grid; grid-template-columns:1fr; gap:1.4rem;
@@ -281,6 +287,10 @@ button{ font-family:var(--sans); cursor:pointer; }
 .step-caption{ font-size:0.95rem; color:var(--gray-700); margin-bottom:1rem; }
 .step-meta{ font-size:0.76rem; line-height:1.9; color:var(--gray-500); border-left:1px solid var(--line); padding-left:1rem; }
 .step-meta b{ color:var(--gray-700); font-weight:500; }
+.step-refs{ display:flex; gap:0.5rem; margin-top:0.6rem; flex-wrap:nowrap; }
+.step-refs img{ height:90px; width:auto; object-fit:cover; display:block; }
+.step-result{ grid-column:1/-1; padding-top:1.6rem; text-align:center; }
+.step-result img,.step-result video{ display:inline-block; max-width:360px; width:100%; height:auto; }
 
 @media (min-width:820px){
   .pipeline-step{ grid-template-columns:80px 1fr 260px; align-items:start; }
@@ -288,8 +298,12 @@ button{ font-family:var(--sans); cursor:pointer; }
 
 /* ---------- About ---------- */
 .about-hero{ padding:16vh 5vw 4vh; max-width:760px; margin:0 auto; }
-.about-hero h1{ font-size:clamp(2rem,4.6vw,3rem); margin-bottom:1.6rem; }
-.about-hero p{ font-size:1.05rem; line-height:1.85; color:var(--gray-700); margin-bottom:1.4rem; max-width:64ch; }
+.about-hero h1{ font-size:clamp(2rem,4.6vw,3rem); margin-bottom:2rem; text-align:center; }
+.about-hero p{ font-size:1rem; line-height:1.8; color:var(--gray-700); font-weight:300; margin-bottom:1.6rem; max-width:none; text-align:justify; hyphens:auto; -webkit-hyphens:auto; }
+.recognition-card{ background:var(--gray-100); padding:1.8rem 2rem; margin:0 0 2.8rem; }
+.recognition-card .eyebrow{ margin-bottom:1rem; }
+.recognition-card p{ margin-bottom:0; }
+.about-portrait{ display:block; width:100%; max-width:380px; height:auto; margin:0 auto 3rem; }
 
 .recognition{ background:var(--black); color:var(--white); padding:10vh 5vw; margin-top:8vh; }
 .recognition-inner{ max-width:820px; margin:0 auto; }
@@ -342,13 +356,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 
 /* ---------- Bio lede / support ---------- */
-.bio-lede{
-  font-family:var(--display); font-size:clamp(1.3rem,2.8vw,1.9rem);
-  line-height:1.4; font-weight:300; margin-bottom:1.1rem;
+.bio-strip p.bio-lede{
+  font-family:var(--display); font-style:italic;
+  font-size:clamp(1.3rem,2.8vw,1.9rem);
+  line-height:1.4; font-weight:400; margin-bottom:1.1rem;
 }
-.bio-support{
-  font-size:0.7rem; letter-spacing:0.18em; text-transform:uppercase;
-  color:var(--gray-500); font-weight:500;
+p.bio-support{
+  font-size:clamp(0.58rem,1.1vw,0.75rem); letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--gray-500); font-weight:500; white-space:nowrap;
 }
 
 /* ---------- Projects outer carousel ---------- */
@@ -383,3 +398,62 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   transition:background .2s;
 }
 .projects-dots span.active{ background:var(--black); }
+
+/* ---------- Fashion Campaign tab ---------- */
+#fashion-campaign .dd-block p{
+  max-width:none; text-align:justify; hyphens:auto; -webkit-hyphens:auto;
+}
+.fc-label{
+  font-size:0.68rem; letter-spacing:0.16em; text-transform:uppercase;
+  color:var(--gray-500); font-weight:500; margin-bottom:0.8rem; display:block;
+}
+.fc-campaign-title{
+  font-size:clamp(1.1rem,2.4vw,1.6rem); font-weight:600; letter-spacing:0.06em;
+  text-transform:uppercase; margin:0.8rem 0 0.4rem; line-height:1.2;
+}
+.fc-campaign-sub{
+  font-family:var(--display); font-style:italic; font-size:1rem;
+  color:var(--gray-500); font-weight:400; margin:0 0 1.4rem;
+}
+.fc-img-wide{ margin:2rem 0; }
+.fc-img-wide img{ width:100%; height:auto; display:block; }
+.fc-list{
+  list-style:none; padding:0; margin:1.4rem 0 2rem;
+}
+.fc-list li{
+  font-size:0.9rem; line-height:1.9; color:var(--gray-700); font-weight:300;
+  padding:0.5rem 0; border-bottom:1px solid var(--line);
+}
+.fc-list li:first-child{ border-top:1px solid var(--line); }
+.fc-list li strong{ font-weight:600; color:var(--black); letter-spacing:0.04em; }
+.fc-lookbook{ display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; }
+.fc-lookbook img{ width:100%; aspect-ratio:4/5; object-fit:cover; display:block; }
+.fc-closing-quote{
+  font-family:var(--display); font-style:italic;
+  font-size:clamp(1rem,2vw,1.3rem); color:var(--gray-700);
+  margin-top:5vh; padding-top:4vh; border-top:1px solid var(--line); text-align:center;
+}
+#fashion-campaign .dd-block p.fc-campaign-sub{ text-align:left; }
+#fashion-campaign .dd-block p.fc-closing-quote{ text-align:center; }
+@media (min-width:700px){ .dd-images--4col{ grid-template-columns:repeat(4,1fr); } }
+
+/* ---------- About — stats row ---------- */
+.stats-row{
+  display:grid; grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  margin-top:1.6rem;
+}
+.stat-cell{
+  display:flex; flex-direction:column; gap:0.4rem;
+  padding:1.2rem 1rem;
+  border-left:1px solid var(--line);
+}
+.stat-cell:first-child{ border-left:none; }
+.stat-number{
+  font-family:var(--display); font-size:clamp(1.3rem,2.4vw,1.8rem);
+  font-weight:500; color:var(--black); line-height:1;
+}
+.stat-caption{
+  font-size:0.62rem; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--gray-500); font-weight:500;
+}

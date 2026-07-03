@@ -4,12 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Sticky nav shrink on scroll ---------- */
   const nav = document.querySelector('.site-nav');
-  const subnav = document.querySelector('.subnav');
+  const topFilters = document.querySelector('.top-filters');
   if (nav) {
     const onScroll = () => {
       const scrolled = window.scrollY > 40;
       nav.classList.toggle('scrolled', scrolled);
-      if (subnav) subnav.style.top = scrolled ? '48px' : '64px';
+      if (topFilters) topFilters.style.top = scrolled ? '48px' : '64px';
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
@@ -101,6 +101,19 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
+    function scrollToFirstAct() {
+      requestAnimationFrame(() => {
+        const firstVisible = [...actCat.keys()].find(act => act.style.display !== 'none');
+        if (!firstVisible) return;
+        const topFiltersEl = document.querySelector('.top-filters');
+        const navH = nav && window.scrollY > 40 ? 48 : 64;
+        const offset = navH + (topFiltersEl ? topFiltersEl.offsetHeight : 0);
+        document.documentElement.style.scrollBehavior = 'auto';
+        window.scrollTo(0, Math.max(0, firstVisible.offsetTop - offset));
+        requestAnimationFrame(() => { document.documentElement.style.scrollBehavior = ''; });
+      });
+    }
+
     subnavLinks.forEach(a => {
       a.addEventListener('click', e => {
         e.preventDefault();
@@ -109,6 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         subnavLinks.forEach(l => l.classList.toggle('active', l === a));
         filterBtns.forEach(b => b.classList.toggle('active', b.dataset.filter === 'all'));
         applyFilters();
+        scrollToFirstAct();
       });
     });
 
@@ -118,6 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.classList.add('active');
         activeFilter = btn.dataset.filter;
         applyFilters();
+        scrollToFirstAct();
       });
     });
 
@@ -165,14 +180,36 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- Deep Dive tabs ---------- */
   const ddTabs = document.querySelectorAll('.dd-tabs button');
   if (ddTabs.length) {
-    ddTabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        ddTabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        document.querySelectorAll('.dd-section').forEach(s => s.style.display = 'none');
-        document.querySelector(tab.dataset.target).style.display = '';
+    function scrollToDDSection(section) {
+      requestAnimationFrame(() => {
+        const ddTabsEl = document.querySelector('.dd-tabs');
+        const navH = nav && window.scrollY > 40 ? 48 : 64;
+        const tabsH = ddTabsEl ? ddTabsEl.offsetHeight : 0;
+        document.documentElement.style.scrollBehavior = 'auto';
+        window.scrollTo(0, Math.max(0, section.offsetTop - navH - tabsH));
+        requestAnimationFrame(() => { document.documentElement.style.scrollBehavior = ''; });
       });
+    }
+
+    const activateTab = (target, doScroll) => {
+      const matched = [...ddTabs].find(t => t.dataset.target === target);
+      if (!matched) return;
+      ddTabs.forEach(t => t.classList.remove('active'));
+      matched.classList.add('active');
+      document.querySelectorAll('.dd-section').forEach(s => s.style.display = 'none');
+      const section = document.querySelector(matched.dataset.target);
+      section.style.display = '';
+      if (doScroll) scrollToDDSection(section);
+    };
+
+    ddTabs.forEach(tab => {
+      tab.addEventListener('click', () => activateTab(tab.dataset.target, true));
     });
+
+    const hash = window.location.hash;
+    if (hash && document.querySelector(hash)) {
+      activateTab(hash, false);
+    }
   }
 
 });

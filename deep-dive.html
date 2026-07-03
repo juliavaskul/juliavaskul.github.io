@@ -30,6 +30,7 @@
 <div class="dd-tabs">
   <button class="active" data-target="#photo-case">Photo Case</button>
   <button data-target="#video-pipeline">Video Pipeline</button>
+  <button data-target="#fashion-campaign">Fashion Campaign</button>
 </div>
 
 <!-- ============ PHOTO CASE — Typology Reimagined ============ -->
@@ -83,7 +84,7 @@
   <div class="dd-block">
     <p>The Typology soap bar presented a different creative problem: a product without decoration, without color, without graphic complexity. A white rectangle with embossed text. This is a test. When the object has nothing to hide behind, the frame must do the work.</p>
     <p>Three directions explored: The coil. The shower hose becomes a graphic element — industrial, circular, grounding the bar within its functional context. The image is about where this object lives. The rupture. A hand breaks through torn paper to present the bar — a gesture of revelation, of something emerging. The bar as discovery. The ground. Bar centered on a steel hose spiral, table-level view, warm shadow. The quietest frame. Confidence through simplicity.</p>
-    <div class="dd-images">
+    <div class="dd-images dd-images--3col">
       <img src="visuals/beauty-product/typology-reimagined/12.jpg" alt="Soap bar with blurred shower hose coil">
       <img src="visuals/beauty-product/typology-reimagined/14.jpg" alt="Hand emerging through torn paper holding soap bar">
       <img src="visuals/beauty-product/typology-reimagined/13.jpg" alt="Soap bar close up on steel coil">
@@ -114,7 +115,7 @@
 <section class="dd-section" id="video-pipeline" style="display:none;">
 
   <div class="dd-block" style="margin-bottom:4vh;">
-    <p style="max-width:70ch;">Serum Mascara T50 (Typology) — the full AI video pipeline, from a single generated portrait to a finished, edited film. Seventeen steps: tool, model, and parameters shown for each. Prompts are not shown.</p>
+    <p>Serum Mascara T50 (Typology) — the full AI video pipeline, from a single generated portrait to a finished, edited film. Seventeen steps: tool, model, and parameters shown for each. Prompts are not shown.</p>
   </div>
 
   <div class="pipeline-step">
@@ -124,6 +125,7 @@
       <p class="step-caption">Close-up studio portrait — clinical minimalist beauty, calm direct gaze.</p>
     </div>
     <div class="step-meta"><b>Tool:</b> Magnific — Image generation<br><b>Model:</b> GPT 2 (image model), quality: High<br><b>Parameters:</b> 9:16, 752×1344px<br><b>References:</b> none (text-prompt only)</div>
+  <div class="step-result"><img src="visuals/process-t50/step-01/result.jpg" alt="Step 01 result"></div>
   </div>
 
   <div class="pipeline-step">
@@ -132,7 +134,8 @@
       <h3 class="step-title">Generate extreme close-up macro beauty shot (skin/eye detail)</h3>
       <p class="step-caption">Extreme macro of eye and cheek — natural skin, soft daylight.</p>
     </div>
-    <div class="step-meta"><b>Tool:</b> Magnific — Image generation<br><b>Model:</b> Google Nano Banana Pro<br><b>Parameters:</b> 9:16, 1536×2752px<br><b>References:</b> base portrait from Step 1</div>
+    <div class="step-meta"><b>Tool:</b> Magnific — Image generation<br><b>Model:</b> Google Nano Banana Pro<br><b>Parameters:</b> 9:16, 1536×2752px<br><b>References:</b> base portrait from Step 1<div class="step-refs"><img src="visuals/process-t50/step-02/reference.jpg" alt="Step 02 reference"></div></div>
+  <div class="step-result"><img src="visuals/process-t50/step-02/result.jpg" alt="Step 02 result"></div>
   </div>
 
   <div class="pipeline-step">
@@ -141,7 +144,8 @@
       <h3 class="step-title">Edit/refine background to clean studio backdrop</h3>
       <p class="step-caption">Same macro portrait, now placed on a clean white studio background.</p>
     </div>
-    <div class="step-meta"><b>Tool:</b> Magnific — Image editing<br><b>Model:</b> Google Nano Banana Pro<br><b>Parameters:</b> 9:16, 1536×2752px<br><b>References:</b> macro shot from Step 2</div>
+    <div class="step-meta"><b>Tool:</b> Magnific — Image editing<br><b>Model:</b> Google Nano Banana Pro<br><b>Parameters:</b> 9:16, 1536×2752px<br><b>References:</b> macro shot from Step 2<div class="step-refs"><img src="visuals/process-t50/step-03/reference.jpg" alt="Step 03 reference"></div></div>
+  <div class="step-result"><img src="visuals/process-t50/step-03/result.jpg" alt="Step 03 result"></div>
   </div>
 
   <div class="pipeline-step">
@@ -150,7 +154,8 @@
       <h3 class="step-title">Flip image horizontally</h3>
       <p class="step-caption">Same macro portrait, mirrored horizontally.</p>
     </div>
-    <div class="step-meta"><b>Tool:</b> Magnific — Image editing<br><b>Model:</b> Google Nano Banana Pro<br><b>Parameters:</b> 9:16, 1536×2752px<br><b>References:</b> clean-background macro from Step 3</div>
+    <div class="step-meta"><b>Tool:</b> Magnific — Image editing<br><b>Model:</b> Google Nano Banana Pro<br><b>Parameters:</b> 9:16, 1536×2752px<br><b>References:</b> clean-background macro from Step 3<div class="step-refs"><img src="visuals/process-t50/step-04/reference.jpg" alt="Step 04 reference"></div></div>
+  <div class="step-result"><img src="visuals/process-t50/step-04/result.jpg" alt="Step 04 result"></div>
   </div>
 
   <div class="pipeline-step">
@@ -160,6 +165,7 @@
       <p class="step-caption">Abstract macro of a mascara wand's zigzag trace on glass.</p>
     </div>
     <div class="step-meta"><b>Tool:</b> Magnific — Image generation<br><b>Model:</b> Google Nano Banana Pro<br><b>Parameters:</b> 9:16, 1536×2752px<br><b>References:</b> none (text-prompt only)</div>
+  <div class="step-result"><img src="visuals/process-t50/step-05/result.jpg" alt="Step 05 result"></div>
   </div>
 
   <div class="pipeline-step">
@@ -168,7 +174,8 @@
       <h3 class="step-title">Apply mascara/lash enhancement to portrait</h3>
       <p class="step-caption">Same macro portrait with subtly enhanced, natural-looking lashes.</p>
     </div>
-    <div class="step-meta"><b>Tool:</b> Magnific — Image editing<br><b>Model:</b> Google Nano Banana Pro<br><b>Parameters:</b> 9:16, 1536×2752px<br><b>References:</b> flipped macro portrait from Step 4 · eye close-up reference</div>
+    <div class="step-meta"><b>Tool:</b> Magnific — Image editing<br><b>Model:</b> Google Nano Banana Pro<br><b>Parameters:</b> 9:16, 1536×2752px<br><b>References:</b> flipped macro portrait from Step 4 · eye close-up reference<div class="step-refs"><img src="visuals/process-t50/step-06/reference1.jpg" alt="Step 06 reference 1"><img src="visuals/process-t50/step-06/reference2.jpg" alt="Step 06 reference 2"></div></div>
+  <div class="step-result"><img src="visuals/process-t50/step-06/result.jpg" alt="Step 06 result"></div>
   </div>
 
   <div class="pipeline-step">
@@ -177,7 +184,8 @@
       <h3 class="step-title">Generate product-in-hand shot (mascara tube label reveal)</h3>
       <p class="step-caption">Hand holding the mascara tube — label fully legible, clean background.</p>
     </div>
-    <div class="step-meta"><b>Tool:</b> Magnific — Image generation<br><b>Model:</b> Google Nano Banana Pro<br><b>Parameters:</b> 9:16, 1536×2752px<br><b>References:</b> mascara tube reference · style reference</div>
+    <div class="step-meta"><b>Tool:</b> Magnific — Image generation<br><b>Model:</b> Google Nano Banana Pro<br><b>Parameters:</b> 9:16, 1536×2752px<br><b>References:</b> mascara tube reference · style reference<div class="step-refs"><img src="visuals/process-t50/step-07/reference1.jpg" alt="Step 07 reference 1"><img src="visuals/process-t50/step-07/reference2.jpg" alt="Step 07 reference 2"></div></div>
+  <div class="step-result"><img src="visuals/process-t50/step-07/result.jpg" alt="Step 07 result"></div>
   </div>
 
   <div class="pipeline-step">
@@ -186,7 +194,8 @@
       <h3 class="step-title">Refine product-in-hand shot (swap tube and hand reference)</h3>
       <p class="step-caption">Refined product-in-hand shot — label sharp and legible.</p>
     </div>
-    <div class="step-meta"><b>Tool:</b> Magnific — Image editing<br><b>Model:</b> Google Nano Banana Pro<br><b>Parameters:</b> 9:16, 1536×2752px<br><b>References:</b> Step 7 · cylindrical product reference · hand reference</div>
+    <div class="step-meta"><b>Tool:</b> Magnific — Image editing<br><b>Model:</b> Google Nano Banana Pro<br><b>Parameters:</b> 9:16, 1536×2752px<br><b>References:</b> Step 7 · cylindrical product reference · hand reference<div class="step-refs"><img src="visuals/process-t50/step-08/reference1.jpg" alt="Step 08 reference 1"><img src="visuals/process-t50/step-08/reference2.jpg" alt="Step 08 reference 2"><img src="visuals/process-t50/step-08/reference3.jpg" alt="Step 08 reference 3"></div></div>
+  <div class="step-result"><img src="visuals/process-t50/step-08/result.jpg" alt="Step 08 result"></div>
   </div>
 
   <div class="pipeline-step">
@@ -195,7 +204,8 @@
       <h3 class="step-title">Generate mascara application action shot</h3>
       <p class="step-caption">Mascara wand actively applying mascara to the lashes.</p>
     </div>
-    <div class="step-meta"><b>Tool:</b> Magnific — Image generation<br><b>Model:</b> Google Nano Banana Pro<br><b>Parameters:</b> 9:16, 1536×2752px<br><b>References:</b> Step 6 · product reference · style reference</div>
+    <div class="step-meta"><b>Tool:</b> Magnific — Image generation<br><b>Model:</b> Google Nano Banana Pro<br><b>Parameters:</b> 9:16, 1536×2752px<br><b>References:</b> Step 6 · product reference · style reference<div class="step-refs"><img src="visuals/process-t50/step-09/reference1.jpg" alt="Step 09 reference 1"><img src="visuals/process-t50/step-09/reference2.jpg" alt="Step 09 reference 2"></div></div>
+  <div class="step-result"><img src="visuals/process-t50/step-09/result.jpg" alt="Step 09 result"></div>
   </div>
 
   <div class="pipeline-step">
@@ -204,7 +214,8 @@
       <h3 class="step-title">Generate final frontal portrait with mascara applied</h3>
       <p class="step-caption">Final frontal portrait — mascara applied, unretouched skin, neutral expression.</p>
     </div>
-    <div class="step-meta"><b>Tool:</b> Magnific — Image generation<br><b>Model:</b> Google Nano Banana Pro<br><b>Parameters:</b> 9:16, 1536×2752px<br><b>References:</b> base portrait from Step 1 · lash reference from Step 9</div>
+    <div class="step-meta"><b>Tool:</b> Magnific — Image generation<br><b>Model:</b> Google Nano Banana Pro<br><b>Parameters:</b> 9:16, 1536×2752px<br><b>References:</b> base portrait from Step 1 · lash reference from Step 9<div class="step-refs"><img src="visuals/process-t50/step-10/reference1.jpg" alt="Step 10 reference 1"><img src="visuals/process-t50/step-10/reference2.jpg" alt="Step 10 reference 2"></div></div>
+  <div class="step-result"><img src="visuals/process-t50/step-10/result.jpg" alt="Step 10 result"></div>
   </div>
 
   <div class="pipeline-step">
@@ -268,6 +279,114 @@
       <p class="step-caption">Final edit — video assembled with voiceover overlay.</p>
     </div>
     <div class="step-meta">&nbsp;</div>
+  <div class="step-result">
+    <video controls preload="none">
+      <source src="visuals/process-t50/step-17/step-17-final-result.mp4" type="video/mp4">
+    </video>
+  </div>
+  </div>
+
+</section>
+
+<!-- ============ FASHION CAMPAIGN — Massimo Dutti ============ -->
+<section class="dd-section" id="fashion-campaign" style="display:none;">
+
+  <!-- Section 1: Cover -->
+  <div class="dd-block">
+    <div class="fc-img-wide">
+      <img src="visuals/fashion-editorial/massimo-dutti/deep-dive/final/section-01-cover.jpg" alt="Massimo Dutti AI campaign cover — model in round concrete arch, black and white">
+    </div>
+    <h1 class="fc-campaign-title">Massimo Dutti — AI Fashion Campaign &amp; Art Direction</h1>
+    <p class="fc-campaign-sub">Neutral Harmony SS26</p>
+  </div>
+
+  <!-- Section 2: Visual Direction -->
+  <div class="dd-block">
+    <span class="fc-label">VISUAL DIRECTION</span>
+    <p>This campaign reinterprets Massimo Dutti's signature minimalism through the lens of brutalist architecture and soft neutral textures. Linen blend knit and organically grown cotton become sculptural elements, while light, shadow and reflection create a quiet dialogue between body and space.</p>
+    <p>AI was the camera. The vision was human.</p>
+    <div class="dd-images">
+      <img src="visuals/fashion-editorial/massimo-dutti/deep-dive/final/section-02-01.jpg" alt="Massimo Dutti campaign — model, black and white, stripe of light on wall">
+      <img src="visuals/fashion-editorial/massimo-dutti/deep-dive/final/section-02-02.jpg" alt="Massimo Dutti campaign — model from behind among concrete forms, black and white">
+    </div>
+  </div>
+
+  <!-- Section 3: Architectural Forms & Knit Textures -->
+  <div class="dd-block">
+    <h2>Architectural forms &amp; knit textures</h2>
+    <p>Inspired by Massimo Dutti's timeless elegance, the campaign explores the harmony between raw architectural forms and delicate knit textures. The color palette — warm beige, stone grey and soft sand — creates a monochromatic world where clothing and environment become one.</p>
+    <div class="fc-img-wide">
+      <img src="visuals/fashion-editorial/massimo-dutti/deep-dive/final/section-03-moodboard.jpg" alt="Massimo Dutti campaign moodboard — knit textures, concrete architecture, shadows, fabric close-ups">
+    </div>
+  </div>
+
+  <!-- Section 4: Production Pipeline -->
+  <div class="dd-block">
+    <span class="fc-label">ART DIRECTION</span>
+    <h2>Production pipeline</h2>
+    <p>Building a stable AI model requires a disciplined creative approach. This ensures visual continuity and a fluid shift from the conceptual stage to the animation phase.</p>
+    <div class="fc-img-wide">
+      <img src="visuals/fashion-editorial/massimo-dutti/deep-dive/final/section-04-pipeline.jpg" alt="Massimo Dutti AI campaign production pipeline diagram — Generate, Pose Grid, Iterate, Upscale, Animate">
+    </div>
+    <p>From first prompt to final frame — every step was intentionally designed:</p>
+    <ul class="fc-list">
+      <li><strong>GENERATE</strong> — Face development (Midjourney + Nano Banana)</li>
+      <li><strong>POSE BOARD</strong> — Pose &amp; angle exploration (Nano Banana + Flux)</li>
+      <li><strong>ITERATE</strong> — Full-body compositions in location (Seedream + Nano Banana)</li>
+      <li><strong>UPSCALE</strong> — Maximum detail &amp; resolution (Magnific)</li>
+      <li><strong>GRADE</strong> — Cinematic color and light (Lightroom)</li>
+      <li><strong>ANIMATE</strong> — Subtle motion (Kling)</li>
+    </ul>
+    <div class="dd-images single">
+      <img src="visuals/fashion-editorial/massimo-dutti/deep-dive/final/section-04-portrait.jpg" alt="Massimo Dutti campaign — close-up portrait of AI model, sweater, face">
+    </div>
+  </div>
+
+  <!-- Section 6: Campaign Gallery -->
+  <div class="dd-block">
+    <span class="fc-label">CAMPAIGN GALLERY</span>
+    <h2>The full edit</h2>
+    <div class="dd-images dd-images--3col">
+      <img src="visuals/fashion-editorial/massimo-dutti/deep-dive/final/section-06-grid-01.jpg" alt="Massimo Dutti campaign — architectural shot in beige, concrete setting">
+      <img src="visuals/fashion-editorial/massimo-dutti/deep-dive/final/section-06-grid-02.jpg" alt="Massimo Dutti campaign — model pose in concrete architecture">
+      <img src="visuals/fashion-editorial/massimo-dutti/deep-dive/final/section-06-grid-03.jpg" alt="Massimo Dutti campaign — angle variation, brutalist background">
+      <img src="visuals/fashion-editorial/massimo-dutti/deep-dive/final/section-06-grid-04.jpg" alt="Massimo Dutti campaign — editorial frame, beige knit">
+      <img src="visuals/fashion-editorial/massimo-dutti/deep-dive/final/section-06-grid-05.jpg" alt="Massimo Dutti campaign — model against concrete wall">
+      <img src="visuals/fashion-editorial/massimo-dutti/deep-dive/final/section-06-grid-06.jpg" alt="Massimo Dutti campaign — full-length pose, neutral palette">
+    </div>
+    <div class="dd-images single" style="margin-top:1rem;">
+      <img src="visuals/fashion-editorial/massimo-dutti/deep-dive/final/section-06-bw-01-REVIEW.jpg" alt="Massimo Dutti campaign — model in beam of light against wall, black and white">
+    </div>
+  </div>
+
+  <!-- Section 7: Editorial Variants -->
+  <div class="dd-block">
+    <span class="fc-label">EDITORIAL VARIANTS</span>
+    <h2>The impossible detail.</h2>
+    <div class="dd-images">
+      <img src="visuals/fashion-editorial/massimo-dutti/deep-dive/final/section-07-01-reflection.jpg" alt="Massimo Dutti campaign — model walking, water reflection at sunset">
+      <img src="visuals/fashion-editorial/massimo-dutti/deep-dive/final/section-07-03-sofa.jpg" alt="Massimo Dutti campaign — model seated on black leather sofa in raw concrete space">
+    </div>
+  </div>
+
+  <!-- Section 8: Lookbook -->
+  <div class="dd-block">
+    <span class="fc-label">LOOKBOOK</span>
+    <h2>Product in context.</h2>
+    <div class="fc-img-wide">
+      <img src="visuals/fashion-editorial/massimo-dutti/deep-dive/final/section-08-lookbook-collage.jpg" alt="Massimo Dutti lookbook — 2×2 collage overview">
+    </div>
+    <div class="dd-images dd-images--4col" style="margin-top:1rem;">
+      <img src="visuals/fashion-editorial/massimo-dutti/deep-dive/final/section-08-lookbook-label.jpg" alt="Massimo Dutti lookbook — brand label on knit texture, Limited Edition Made in Italy">
+      <img src="visuals/fashion-editorial/massimo-dutti/deep-dive/final/section-08-lookbook-detail-01.jpg" alt="Massimo Dutti lookbook — trouser hem and shoes close-up">
+      <img src="visuals/fashion-editorial/massimo-dutti/deep-dive/final/section-08-lookbook-front.jpg" alt="Massimo Dutti lookbook — model full length front, studio">
+      <img src="visuals/fashion-editorial/massimo-dutti/deep-dive/final/section-08-lookbook-overhead.jpg" alt="Massimo Dutti lookbook — overhead view, model looking down">
+    </div>
+    <div class="dd-images" style="margin-top:1rem;">
+      <img src="visuals/fashion-editorial/massimo-dutti/deep-dive/final/section-08-lookbook-hem-shoes.jpg" alt="Massimo Dutti lookbook — hem and shoes detail, full close-up">
+      <img src="visuals/fashion-editorial/massimo-dutti/deep-dive/final/section-08-lookbook-pocket-detail.jpg" alt="Massimo Dutti lookbook — hand in trouser pocket, fabric close-up">
+    </div>
+    <p class="fc-closing-quote">"Not every image needs to be taken. Some need to be created."</p>
   </div>
 
 </section>
@@ -276,7 +395,6 @@
   <span>© 2026 Julia Vaskul — Basque Breeze</span>
   <div class="footer-social">
     <a href="https://www.linkedin.com/in/julia-vaskul-b84625381" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://www.behance.net/juliavaskul1" target="_blank" rel="noopener">Behance</a>
   </div>
 </footer>
 

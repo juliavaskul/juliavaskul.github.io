@@ -26,8 +26,8 @@
   <h1>Start a project</h1>
   <p>Fashion, beauty, or commercial — tell me a little about what you have in mind.</p>
 
-  <!-- Replace YOUR_FORM_ID with your Formspree endpoint after registering at formspree.io -->
-  <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+  <form id="contact-form" action="https://formspree.io/f/mdaryzqg" method="POST">
+    <input type="hidden" name="_subject" value="New message from Basque Breeze website">
     <div class="form-field">
       <label for="name">Name</label>
       <input type="text" id="name" name="name" required>
@@ -42,6 +42,7 @@
     </div>
     <button type="submit" class="submit-btn">Send message</button>
   </form>
+  <p id="form-status" style="display:none; margin-top:1.6rem; font-size:1rem; line-height:1.8; color:var(--gray-700);"></p>
 
   <p class="contact-alt">Or reach out directly on <a href="https://www.linkedin.com/in/julia-vaskul-b84625381" target="_blank" rel="noopener">LinkedIn</a>.</p>
 </section>
@@ -50,10 +51,34 @@
   <span>© 2026 Julia Vaskul — Basque Breeze</span>
   <div class="footer-social">
     <a href="https://www.linkedin.com/in/julia-vaskul-b84625381" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://www.behance.net/juliavaskul1" target="_blank" rel="noopener">Behance</a>
   </div>
 </footer>
 
 <script src="js/main.js"></script>
+<script>
+  const contactForm = document.getElementById('contact-form');
+  const formStatus  = document.getElementById('form-status');
+  if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      try {
+        const res = await fetch(contactForm.action, {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          contactForm.style.display = 'none';
+          formStatus.textContent = 'Thank you — I\'ll be in touch soon.';
+        } else {
+          formStatus.textContent = 'Something went wrong — please try again or email directly.';
+        }
+      } catch {
+        formStatus.textContent = 'Something went wrong — please try again or email directly.';
+      }
+      formStatus.style.display = '';
+    });
+  }
+</script>
 </body>
 </html>
