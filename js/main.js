@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const wrap = btn.closest('.act-media');
       const iframe = document.createElement('iframe');
       iframe.className = 'yt-embed';
-      iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&playsinline=1`;
+      iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&playsinline=1&enablejsapi=1`;
       iframe.title = 'Video';
       iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
       iframe.allowFullscreen = true;
@@ -145,6 +145,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const goTo = (idx) => {
+      // Pause any active YouTube embed before switching slide
+      document.querySelectorAll('.yt-embed').forEach(f => {
+        try { f.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*'); } catch(_) {}
+      });
       current = Math.max(0, Math.min(idx, slides.length - 1));
       track.style.transform = `translateX(-${current * 100}%)`;
       dotsWrap.querySelectorAll('span').forEach((d, i) => d.classList.toggle('active', i === current));
@@ -159,8 +163,14 @@ document.addEventListener('DOMContentLoaded', () => {
       touchTarget = e.target;
     }, { passive: true });
     track.addEventListener('touchend', e => {
-      if (touchTarget && touchTarget.closest('.carousel')) return;
       const dx = e.changedTouches[0].clientX - touchStartX;
+      const innerTrack = touchTarget && touchTarget.closest('.carousel-track');
+      if (innerTrack) {
+        const atStart = innerTrack.scrollLeft < 5;
+        const atEnd = innerTrack.scrollLeft > innerTrack.scrollWidth - innerTrack.clientWidth - 5;
+        // Only allow outer navigation when inner carousel is at its edge
+        if (!((dx > 0 && atStart) || (dx < 0 && atEnd))) return;
+      }
       if (Math.abs(dx) > 50) goTo(current + (dx < 0 ? 1 : -1));
     }, { passive: true });
   }

@@ -110,7 +110,10 @@ button{ font-family:var(--sans); cursor:pointer; }
 .media-filter button.active{ color:var(--black); border-bottom:1px solid var(--black); }
 
 @media (max-width:760px){
-  /* Nav: always-visible compact horizontal strip, no hamburger */
+  /* ---------- Overflow prevention ---------- */
+  html{ overflow-x:hidden; }
+
+  /* ---------- Nav: logo hidden, 5 items fill bar evenly ---------- */
   .site-nav{
     padding:0 4vw; height:48px;
     background:rgba(255,255,255,0.96); backdrop-filter:blur(10px);
@@ -119,27 +122,37 @@ button{ font-family:var(--sans); cursor:pointer; }
   .site-nav.on-dark{ color:var(--black); background:rgba(255,255,255,0.96); }
   .site-nav.on-dark .nav-links a{ color:var(--black); }
   .site-nav.scrolled{ padding:0 4vw; height:48px; }
+  .nav-brand{ display:none; }
   .nav-toggle{ display:none; }
-  .nav-brand{ font-size:0.88rem; flex-shrink:0; }
   .nav-links{
-    display:flex; flex-wrap:nowrap; overflow-x:auto; gap:0;
-    scrollbar-width:none; -webkit-overflow-scrolling:touch;
-    flex:1; min-width:0; margin-left:0.8rem;
+    display:flex; flex-wrap:nowrap; gap:0;
+    width:100%; justify-content:space-evenly; margin-left:0; overflow-x:visible;
   }
-  .nav-links::-webkit-scrollbar{ display:none; }
   .nav-links li{ flex-shrink:0; }
   .nav-links a{ font-size:0.62rem; letter-spacing:0.1em; padding:4px 0.5rem 6px; }
-  /* Work page: two sticky rows */
+
+  /* ---------- Work page: two sticky rows ---------- */
   .top-filters{ top:48px; }
   .subnav{
     gap:0; flex-wrap:nowrap; overflow-x:auto; justify-content:flex-start;
     -webkit-overflow-scrolling:touch; padding:10px 4vw;
   }
   .subnav a{ padding:0 1rem 4px; white-space:nowrap; flex-shrink:0; }
-  /* Hide media type filter — all items in category visible on mobile */
   .media-filter{ display:none; }
-  /* Deep Dive tab bar offset */
+
+  /* ---------- Deep Dive tab bar offset ---------- */
   .dd-tabs{ top:48px; }
+
+  /* ---------- About: stats 2×2, smaller caption ---------- */
+  .stats-row{ grid-template-columns:repeat(2,1fr); }
+  .stat-number{ font-size:1.1rem; }
+  .stat-caption{ font-size:0.5rem; letter-spacing:0.06em; }
+
+  /* ---------- Bio strip: prevent text overflow ---------- */
+  p.bio-support{ white-space:normal; overflow-wrap:break-word; }
+
+  /* ---------- Photo carousel: arrows always visible on touch ---------- */
+  .carousel-arrow{ opacity:0.85; }
 }
 
 /* ---------- Hero ---------- */
