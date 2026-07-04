@@ -110,9 +110,36 @@ button{ font-family:var(--sans); cursor:pointer; }
 .media-filter button.active{ color:var(--black); border-bottom:1px solid var(--black); }
 
 @media (max-width:760px){
-  .nav-links{ display:none; }
-  .nav-toggle{ display:block; }
-  .subnav{ gap:1.2rem; overflow-x:auto; justify-content:flex-start; -webkit-overflow-scrolling:touch; }
+  /* Nav: always-visible compact horizontal strip, no hamburger */
+  .site-nav{
+    padding:0 4vw; height:48px;
+    background:rgba(255,255,255,0.96); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line); color:var(--black);
+  }
+  .site-nav.on-dark{ color:var(--black); background:rgba(255,255,255,0.96); }
+  .site-nav.on-dark .nav-links a{ color:var(--black); }
+  .site-nav.scrolled{ padding:0 4vw; height:48px; }
+  .nav-toggle{ display:none; }
+  .nav-brand{ font-size:0.88rem; flex-shrink:0; }
+  .nav-links{
+    display:flex; flex-wrap:nowrap; overflow-x:auto; gap:0;
+    scrollbar-width:none; -webkit-overflow-scrolling:touch;
+    flex:1; min-width:0; margin-left:0.8rem;
+  }
+  .nav-links::-webkit-scrollbar{ display:none; }
+  .nav-links li{ flex-shrink:0; }
+  .nav-links a{ font-size:0.62rem; letter-spacing:0.1em; padding:4px 0.5rem 6px; }
+  /* Work page: two sticky rows */
+  .top-filters{ top:48px; }
+  .subnav{
+    gap:0; flex-wrap:nowrap; overflow-x:auto; justify-content:flex-start;
+    -webkit-overflow-scrolling:touch; padding:10px 4vw;
+  }
+  .subnav a{ padding:0 1rem 4px; white-space:nowrap; flex-shrink:0; }
+  /* Hide media type filter — all items in category visible on mobile */
+  .media-filter{ display:none; }
+  /* Deep Dive tab bar offset */
+  .dd-tabs{ top:48px; }
 }
 
 /* ---------- Hero ---------- */

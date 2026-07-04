@@ -9,28 +9,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const onScroll = () => {
       const scrolled = window.scrollY > 40;
       nav.classList.toggle('scrolled', scrolled);
-      if (topFilters) topFilters.style.top = scrolled ? '48px' : '64px';
+      if (topFilters && window.innerWidth > 760) topFilters.style.top = scrolled ? '48px' : '64px';
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
   }
 
-  /* ---------- Mobile nav toggle ---------- */
-  const toggle = document.querySelector('.nav-toggle');
-  const links = document.querySelector('.nav-links');
-  if (toggle && links) {
-    toggle.addEventListener('click', () => {
-      const open = links.style.display === 'flex';
-      links.style.display = open ? 'none' : 'flex';
-      links.style.flexDirection = 'column';
-      links.style.position = 'fixed';
-      links.style.top = '64px';
-      links.style.left = '0';
-      links.style.right = '0';
-      links.style.background = '#fff';
-      links.style.padding = '24px 5vw';
-      links.style.gap = '1.2rem';
-    });
+  /* ---------- Mobile: scroll active nav item into view ---------- */
+  if (window.innerWidth <= 760) {
+    const activeNavLink = document.querySelector('.nav-links a.active');
+    if (activeNavLink) activeNavLink.scrollIntoView({ inline: 'nearest', block: 'nearest' });
   }
 
   /* ---------- Video click-to-play (YouTube) ---------- */
@@ -106,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const firstVisible = [...actCat.keys()].find(act => act.style.display !== 'none');
         if (!firstVisible) return;
         const topFiltersEl = document.querySelector('.top-filters');
-        const navH = nav && window.scrollY > 40 ? 48 : 64;
+        const navH = window.innerWidth <= 760 ? 48 : (nav && window.scrollY > 40 ? 48 : 64);
         const offset = navH + (topFiltersEl ? topFiltersEl.offsetHeight : 0);
         document.documentElement.style.scrollBehavior = 'auto';
         window.scrollTo(0, Math.max(0, firstVisible.offsetTop - offset));
@@ -183,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function scrollToDDSection(section) {
       requestAnimationFrame(() => {
         const ddTabsEl = document.querySelector('.dd-tabs');
-        const navH = nav && window.scrollY > 40 ? 48 : 64;
+        const navH = window.innerWidth <= 760 ? 48 : (nav && window.scrollY > 40 ? 48 : 64);
         const tabsH = ddTabsEl ? ddTabsEl.offsetHeight : 0;
         document.documentElement.style.scrollBehavior = 'auto';
         window.scrollTo(0, Math.max(0, section.offsetTop - navH - tabsH));
