@@ -21,9 +21,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (activeNavLink) activeNavLink.scrollIntoView({ inline: 'nearest', block: 'nearest' });
   }
 
+  /* ---------- Pause all YouTube iframes ---------- */
+  const pauseAllYT = () => {
+    document.querySelectorAll('.yt-embed').forEach(f => {
+      try { f.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*'); } catch(_) {}
+    });
+  };
+
   /* ---------- Video click-to-play (YouTube) ---------- */
   document.querySelectorAll('.play-trigger[data-yt]').forEach(btn => {
-    btn.addEventListener('click', () => {
+    const loadVideo = () => {
       const id = btn.dataset.yt;
       const wrap = btn.closest('.act-media');
       const iframe = document.createElement('iframe');
@@ -34,7 +41,21 @@ document.addEventListener('DOMContentLoaded', () => {
       iframe.allowFullscreen = true;
       wrap.innerHTML = '';
       wrap.appendChild(iframe);
-    });
+    };
+
+    // touchend fires synchronously in iOS gesture chain — better autoplay than click
+    let btnTouchStartX = 0;
+    btn.addEventListener('touchstart', e => {
+      btnTouchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    btn.addEventListener('touchend', e => {
+      if (Math.abs(e.changedTouches[0].clientX - btnTouchStartX) < 10) {
+        e.preventDefault(); // prevent subsequent click
+        loadVideo();
+      }
+    }, { passive: false });
+
+    btn.addEventListener('click', loadVideo);
   });
 
   /* ---------- Photo carousels ---------- */
@@ -58,9 +79,11 @@ document.addEventListener('DOMContentLoaded', () => {
       dotsWrap?.querySelectorAll('span').forEach((d, i) => d.classList.toggle('active', i === idx));
     };
     track.addEventListener('scroll', () => window.requestAnimationFrame(updateDots), { passive: true });
+    // pause video when inner carousel slide changes (swipe or arrow)
+    track.addEventListener('scrollend', pauseAllYT, { passive: true });
 
-    prev?.addEventListener('click', () => track.scrollBy({ left: -track.clientWidth, behavior: 'smooth' }));
-    next?.addEventListener('click', () => track.scrollBy({ left: track.clientWidth, behavior: 'smooth' }));
+    prev?.addEventListener('click', () => { pauseAllYT(); track.scrollBy({ left: -track.clientWidth, behavior: 'smooth' }); });
+    next?.addEventListener('click', () => { pauseAllYT(); track.scrollBy({ left: track.clientWidth, behavior: 'smooth' }); });
   });
 
   /* ---------- Work page: category tabs + media filter ---------- */
@@ -145,10 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const goTo = (idx) => {
-      // Pause any active YouTube embed before switching slide
-      document.querySelectorAll('.yt-embed').forEach(f => {
-        try { f.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*'); } catch(_) {}
-      });
+      pauseAllYT();
       current = Math.max(0, Math.min(idx, slides.length - 1));
       track.style.transform = `translateX(-${current * 100}%)`;
       dotsWrap.querySelectorAll('span').forEach((d, i) => d.classList.toggle('active', i === current));
