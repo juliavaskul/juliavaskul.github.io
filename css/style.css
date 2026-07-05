@@ -293,6 +293,11 @@ button{ font-family:var(--sans); cursor:pointer; }
 .dd-images.single{ grid-template-columns:1fr; max-width:520px; margin:0 auto; }
 .dd-images img{ width:100%; aspect-ratio:4/5; object-fit:cover; }
 @media (min-width:700px){ .dd-images--3col{ grid-template-columns:repeat(3,1fr); } }
+@media (min-width:700px){
+  /* Desktop visual order: 12 | 14 | 13 — HTML stays [12][13][14] to keep mobile nth-child(3) intact */
+  #photo-case .dd-images--3col img:nth-child(2){ order: 3; }
+  #photo-case .dd-images--3col img:nth-child(3){ order: 2; }
+}
 #photo-case .dd-block p{ max-width:none; text-align:justify; hyphens:auto; -webkit-hyphens:auto; }
 #video-pipeline .dd-block p{ max-width:none; text-align:justify; hyphens:auto; -webkit-hyphens:auto; }
 
