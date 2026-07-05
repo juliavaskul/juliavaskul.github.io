@@ -495,4 +495,11 @@ p.bio-support{
 
   /* ---------- Photo carousel: arrows always visible on touch ---------- */
   .carousel-arrow{ opacity:0.85; }
+
+  /* ---------- Deep Dive 3-col grid: 13.jpg alone centered on row 2 ---------- */
+  .dd-images--3col img:nth-child(3){
+    grid-column: 1 / -1;
+    width: calc(50% - 0.5rem);
+    justify-self: center;
+  }
 }
