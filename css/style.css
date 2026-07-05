@@ -99,16 +99,6 @@ button{ font-family:var(--sans); cursor:pointer; }
 }
 .subnav a.active,.subnav a:hover{ color:var(--black); border-color:var(--black); }
 
-.media-filter{
-  display:flex; gap:1.6rem; justify-content:center;
-  padding:12px 5vw 16px; border-bottom:1px solid var(--line); background:var(--white);
-}
-.media-filter button{
-  background:none; border:none; font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase;
-  color:var(--gray-500); padding:2px 0;
-}
-.media-filter button.active{ color:var(--black); border-bottom:1px solid var(--black); }
-
 @media (max-width:760px){
   /* ---------- Nav: logo hidden, 5 items fill bar evenly ---------- */
   .site-nav{
@@ -135,7 +125,6 @@ button{ font-family:var(--sans); cursor:pointer; }
     -webkit-overflow-scrolling:touch; padding:10px 4vw;
   }
   .subnav a{ padding:0 1rem 4px; white-space:nowrap; flex-shrink:0; }
-  .media-filter{ display:none; }
 
   /* ---------- Video: eliminate iOS tap delay ---------- */
   .play-trigger{ touch-action:manipulation; }
@@ -173,6 +162,10 @@ button{ font-family:var(--sans); cursor:pointer; }
   position:absolute; bottom:28px; left:5vw; z-index:2;
   font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,.75);
   display:flex; align-items:center; gap:10px;
+}
+@media (min-width:761px){
+  .hero-content{ padding-bottom:90px; }
+  .scroll-cue{ bottom:40px; }
 }
 .scroll-cue::after{ content:''; width:1px; height:26px; background:rgba(255,255,255,.5); animation:cue 2s infinite; }
 @keyframes cue{ 0%{transform:scaleY(0); transform-origin:top;} 50%{transform:scaleY(1); transform-origin:top;} 51%{transform-origin:bottom;} 100%{transform:scaleY(0); transform-origin:bottom;} }

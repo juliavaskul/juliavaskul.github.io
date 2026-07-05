@@ -86,13 +86,11 @@ document.addEventListener('DOMContentLoaded', () => {
     next?.addEventListener('click', () => { pauseAllYT(); track.scrollBy({ left: track.clientWidth, behavior: 'smooth' }); });
   });
 
-  /* ---------- Work page: category tabs + media filter ---------- */
+  /* ---------- Work page: category tabs ---------- */
   const subnavLinks = document.querySelectorAll('.subnav a[data-cat]');
-  const filterBtns  = document.querySelectorAll('.media-filter button');
   const catHeadings = document.querySelectorAll('.category-heading[id]');
 
   if (subnavLinks.length && catHeadings.length) {
-    // Map each .act to its parent category id using DOM order
     const actCat = new Map();
     catHeadings.forEach(h => {
       let el = h.nextElementSibling;
@@ -102,13 +100,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    let activeCat    = 'heritage-narrative';
-    let activeFilter = 'all';
+    let activeCat = 'heritage-narrative';
 
     function applyFilters() {
       actCat.forEach((cat, act) => {
-        const show = cat === activeCat && (activeFilter === 'all' || act.dataset.type === activeFilter);
-        act.style.display = show ? '' : 'none';
+        act.style.display = cat === activeCat ? '' : 'none';
       });
     }
 
@@ -128,26 +124,14 @@ document.addEventListener('DOMContentLoaded', () => {
     subnavLinks.forEach(a => {
       a.addEventListener('click', e => {
         e.preventDefault();
-        activeCat    = a.dataset.cat;
-        activeFilter = 'all';
+        activeCat = a.dataset.cat;
         subnavLinks.forEach(l => l.classList.toggle('active', l === a));
-        filterBtns.forEach(b => b.classList.toggle('active', b.dataset.filter === 'all'));
         applyFilters();
         scrollToFirstAct();
       });
     });
 
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        activeFilter = btn.dataset.filter;
-        applyFilters();
-        scrollToFirstAct();
-      });
-    });
-
-    applyFilters(); // init: show only Heritage & Narrative
+    applyFilters();
   }
 
   /* ---------- Projects outer carousel ---------- */
