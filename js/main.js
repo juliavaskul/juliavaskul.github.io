@@ -195,6 +195,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   }
 
+  /* ---------- Pause video when act-media leaves viewport ---------- */
+  // Covers Work page (vertical scroll) and Home (outer carousel transform)
+  const actsIO = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting && entry.target.querySelector('.yt-embed')) {
+        pauseAllYT();
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.act-media').forEach(el => actsIO.observe(el));
+
   /* ---------- Deep Dive tabs ---------- */
   const ddTabs = document.querySelectorAll('.dd-tabs button');
   if (ddTabs.length) {

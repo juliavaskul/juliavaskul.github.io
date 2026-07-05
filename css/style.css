@@ -137,26 +137,8 @@ button{ font-family:var(--sans); cursor:pointer; }
   .subnav a{ padding:0 1rem 4px; white-space:nowrap; flex-shrink:0; }
   .media-filter{ display:none; }
 
-  /* ---------- Deep Dive tab bar: sticky under nav ---------- */
-  /* html{overflow-x:hidden} removed — it breaks position:sticky in Safari */
-  .dd-tabs{ position:sticky; top:48px; padding:10px 4vw; }
-
-  /* ---------- About: stats 2×2, compact so all captions fit one line ---------- */
-  .stats-row{ grid-template-columns:repeat(2,1fr); }
-  .recognition-card{ padding:1.2rem 1rem; }
-  .stat-cell{ padding:0.8rem 0.5rem; }
-  .stat-number{ font-size:1rem; }
-  .stat-caption{ font-size:0.44rem; letter-spacing:0; }
-
-  /* ---------- Bio strip: forced line break + overflow prevention ---------- */
-  p.bio-support{ white-space:normal; overflow-wrap:break-word; }
-  .bio-break{ display:block; }
-
   /* ---------- Video: eliminate iOS tap delay ---------- */
   .play-trigger{ touch-action:manipulation; }
-
-  /* ---------- Photo carousel: arrows always visible on touch ---------- */
-  .carousel-arrow{ opacity:0.85; }
 }
 
 /* ---------- Hero ---------- */
@@ -500,4 +482,24 @@ p.bio-support{
 .stat-caption{
   font-size:0.62rem; letter-spacing:0.14em; text-transform:uppercase;
   color:var(--gray-500); font-weight:500;
+}
+
+/* ====== Mobile overrides — placed at end so they beat global rules above ====== */
+@media (max-width:760px){
+  /* ---------- Deep Dive tab bar: sticky under nav ---------- */
+  .dd-tabs{ position:sticky; top:48px; padding:10px 4vw; }
+
+  /* ---------- About: stats 2×2 grid, caption fits without wrapping ---------- */
+  .stats-row{ grid-template-columns:repeat(2,1fr); }
+  .recognition-card{ padding:1.2rem 1rem; }
+  .stat-cell{ padding:0.8rem 0.5rem; overflow:hidden; }
+  .stat-number{ font-size:1rem; }
+  .stat-caption{ font-size:0.6rem; letter-spacing:0; white-space:nowrap; }
+
+  /* ---------- Bio strip: forced line break + overflow prevention ---------- */
+  p.bio-support{ white-space:normal; overflow-wrap:break-word; }
+  .bio-break{ display:block; }
+
+  /* ---------- Photo carousel: arrows always visible on touch ---------- */
+  .carousel-arrow{ opacity:0.85; }
 }
