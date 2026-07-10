@@ -58,6 +58,31 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', loadVideo);
   });
 
+  /* ---------- Video click-to-play (local MP4) ---------- */
+  document.querySelectorAll('.play-trigger[data-src]').forEach(btn => {
+    const loadLocalVideo = () => {
+      const wrap = btn.closest('.act-media');
+      const video = wrap.querySelector('.local-video');
+      if (!video) return;
+      btn.remove();
+      video.controls = true;
+      video.play();
+    };
+
+    let btnTouchStartX = 0;
+    btn.addEventListener('touchstart', e => {
+      btnTouchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    btn.addEventListener('touchend', e => {
+      if (Math.abs(e.changedTouches[0].clientX - btnTouchStartX) < 10) {
+        e.preventDefault();
+        loadLocalVideo();
+      }
+    }, { passive: false });
+
+    btn.addEventListener('click', loadLocalVideo);
+  });
+
   /* ---------- Photo carousels ---------- */
   document.querySelectorAll('.carousel').forEach(carousel => {
     const track = carousel.querySelector('.carousel-track');
@@ -183,8 +208,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Covers Work page (vertical scroll) and Home (outer carousel transform)
   const actsIO = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (!entry.isIntersecting && entry.target.querySelector('.yt-embed')) {
-        pauseAllYT();
+      if (!entry.isIntersecting) {
+        if (entry.target.querySelector('.yt-embed')) pauseAllYT();
+        const localVid = entry.target.querySelector('.local-video');
+        if (localVid && !localVid.paused) localVid.pause();
       }
     });
   }, { threshold: 0.5 });
