@@ -331,7 +331,7 @@ const DICT={
   q1:['Images','Video','Both','Not sure yet'],q2:['Launch / campaign','Website & e-shop','Social media','Other'],
   name:'Name',email:'Email',message:'Message',send:'Send',sending:'Sending…',orWrite:'or write to',
   formMissing:'Please add your name, email and a message.',formOk:'Thank you — I’ll be in touch soon.',formErr:'Something went wrong — please try again or email me directly.',
-  cookieT:'This site uses cookies for anonymous visit statistics, to see which work is viewed. Nothing is shared or sold.',accept:'Accept',decline:'Decline'},
+  cookieT:'This site uses cookies for visit statistics and anonymous session recordings, to see which work is viewed and how the site is used. Form fields are never recorded. Nothing is shared or sold.',accept:'Accept',decline:'Decline'},
  fr:{about:'À propos',fashion:'Mode',beauty:'Beauté',film:'Film',contact:'Contact',menu:'Menu',legal:'Mentions légales',
   swipeSeries:'glissez pour les autres séries',tapWatch:'touchez pour voir',scrollSeries:'faites défiler la série',turnPage:'glissez pour tourner la page',scrollFilm:'faites défiler le film',
   series:n=>`${n} séries`,next:'Suivant',nextProject:'Projet suivant',moodboard:'Moodboard',moodboardSig:'moodboard',
@@ -348,7 +348,7 @@ const DICT={
   q1:['Images','Vidéo','Les deux','Je ne sais pas encore'],q2:['Lancement / campagne','Site web & e-shop','Réseaux sociaux','Autre'],
   name:'Nom',email:'E-mail',message:'Message',send:'Envoyer',sending:'Envoi…',orWrite:'ou écrivez à',
   formMissing:'Merci d’indiquer votre nom, votre e-mail et un message.',formOk:'Merci — je vous réponds très vite.',formErr:'Une erreur s’est produite — réessayez ou écrivez-moi directement.',
-  cookieT:'Ce site utilise des cookies pour des statistiques de visite anonymes, afin de savoir quels travaux sont consultés. Rien n’est partagé ni vendu.',accept:'Accepter',decline:'Refuser'}
+  cookieT:'Ce site utilise des cookies pour des statistiques de visite et des enregistrements de navigation anonymes, afin de savoir quels travaux sont consultés et comment le site est utilisé. Les champs de formulaire ne sont jamais enregistrés. Rien n’est partagé ni vendu.',accept:'Accepter',decline:'Refuser'}
 };
 let LANG=(()=>{try{const q=new URLSearchParams(location.search).get('lang');if(q==='fr'||q==='en'){localStorage.setItem('jv-lang',q);return q}const st=localStorage.getItem('jv-lang');if(st==='fr'||st==='en')return st}catch(e){}return (navigator.language||'').toLowerCase().startsWith('fr')?'fr':'en'})();
 let T=DICT[LANG];
@@ -789,7 +789,7 @@ function vLegal(){
    <h3 class="caps">${fr?'Propriété intellectuelle':'Intellectual property'}</h3>
    <p>${fr?'Les images et films présentés sont des créations conceptuelles indépendantes, entièrement générées par IA. Les marques citées appartiennent à leurs propriétaires respectifs ; leur mention n’implique aucun partenariat ni commande. Toute reproduction des contenus sans autorisation est interdite.':'The images and films shown are independent conceptual work, fully AI-generated. Brands mentioned belong to their respective owners; their mention implies no partnership or commission. Reproduction of the content without permission is prohibited.'}</p>
    <h3 class="caps">${fr?'Données personnelles':'Personal data'}</h3>
-   <p>${fr?'Le formulaire de contact transmet votre nom, votre e-mail et votre message via Formspree (formspree.io), uniquement pour vous répondre. Avec votre accord, des statistiques de visite anonymes sont mesurées avec PostHog (serveurs dans l’UE). Vous pouvez demander l’accès à vos données ou leur suppression à julie.vaskul@gmail.com.':'The contact form sends your name, email and message through Formspree (formspree.io), only to reply to you. With your consent, anonymous visit statistics are measured with PostHog (EU servers). You can ask to access or delete your data at julie.vaskul@gmail.com.'}</p>
+   <p>${fr?'Le formulaire de contact transmet votre nom, votre e-mail et votre message via Formspree (formspree.io), uniquement pour vous répondre. Avec votre accord, des statistiques de visite et des enregistrements de navigation anonymes (champs de formulaire masqués) sont réalisés avec PostHog (serveurs dans l’UE), conservés 30 jours pour les enregistrements. Vous pouvez demander l’accès à vos données ou leur suppression à julie.vaskul@gmail.com.':'The contact form sends your name, email and message through Formspree (formspree.io), only to reply to you. With your consent, visit statistics and anonymous session recordings (form fields masked) are collected with PostHog (EU servers); recordings are kept for 30 days. You can ask to access or delete your data at julie.vaskul@gmail.com.'}</p>
    ${POSTHOG_KEY?`<p><button class="caps" id="consent-reset" style="text-decoration:underline;text-underline-offset:3px">${fr?'Modifier mon choix de cookies':'Change my cookie choice'}</button></p>`:''}
   </div></div>`;
   const cr=$('#consent-reset',v);if(cr)cr.onclick=()=>{try{localStorage.removeItem('jv-consent')}catch(e){}location.reload()};
