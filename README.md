@@ -8,4 +8,4 @@ Personal portfolio of Julia Vaskul — single-page site (EN/FR), GitHub Pages.
 
 To fill in later (search `index.html`):
 - PostHog EU project 343518 (key set in index.html)
-- `[à compléter]` in the legal notice — SIRET and address
+- Legal notice: add SIRET (and address if wanted) after registration
