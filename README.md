@@ -7,5 +7,5 @@ Personal portfolio of Julia Vaskul — single-page site (EN/FR), GitHub Pages.
 - `about.html`, `work.html`, `contact.html`, `deep-dive.html` — redirects from the old site's addresses
 
 To fill in later (search `index.html`):
-- `POSTHOG_KEY=''` — PostHog EU project key (phc_…); the cookie banner appears automatically once it is set
+- PostHog EU project 343518 (key set in index.html)
 - `[à compléter]` in the legal notice — SIRET and address

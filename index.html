@@ -361,7 +361,7 @@ function applyChrome(){document.documentElement.lang=LANG;
   $('#cookie')&&cookieText()}
 
 /* ================= ANALYTICS (PostHog, EU) — runs only after consent ================= */
-const POSTHOG_KEY='';            // ← paste the EU project API key (phc_…) here
+const POSTHOG_KEY='phc_tMhnxQviMHyugYe9kG5WAMDYos4VEKCp5sHQEdMLPrka';            // ← paste the EU project API key (phc_…) here
 const POSTHOG_HOST='https://eu.i.posthog.com';
 let PH=null;const PHQ=[];
 function track(ev,props){try{const p={...(props||{}),lang:LANG,mobile:innerWidth<=760};if(PH)PH.capture(ev,p);else PHQ.push([ev,p])}catch(e){}}
