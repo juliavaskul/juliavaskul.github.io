@@ -1,0 +1,31 @@
+name: Build SEO pages
+# Regenerates every project / section page (EN + FR) and sitemap.xml from /index.html.
+on:
+  push:
+    branches: [main]
+    paths: ['index.html', 'tools/**', 'm/**']
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node tools/build-pages.mjs
+      - name: Commit generated pages
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -A
+            git commit -m "Regenerate SEO pages and sitemap"
+            git push
+            gh api -X POST "repos/${{ github.repository }}/pages/builds" || true
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}
