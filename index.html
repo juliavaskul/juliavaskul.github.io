@@ -2,19 +2,25 @@
 <html lang="en" translate="no">
 <head>
 <meta charset="utf-8">
+<base href="/">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!--SEO-->
 <title>Julia Vaskul — AI Creative Director · Fashion &amp; Beauty</title>
 <meta name="description" content="Julia Vaskul, AI creative director based in Hendaye, France. Fully AI-generated fashion and beauty campaigns and films, held to the standards of a real shoot.">
 <link rel="canonical" href="https://juliavaskul.com/">
-<link rel="alternate" hreflang="en" href="https://juliavaskul.com/?lang=en">
-<link rel="alternate" hreflang="fr" href="https://juliavaskul.com/?lang=fr">
+<link rel="alternate" hreflang="en" href="https://juliavaskul.com/">
+<link rel="alternate" hreflang="fr" href="https://juliavaskul.com/fr/">
 <link rel="alternate" hreflang="x-default" href="https://juliavaskul.com/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Julia Vaskul — AI Creative Director">
-<meta property="og:description" content="Fashion and beauty campaigns and films, fully AI-generated.">
+<meta property="og:site_name" content="Julia Vaskul">
+<meta property="og:locale" content="en_GB">
+<meta property="og:title" content="Julia Vaskul — AI Creative Director · Fashion &amp; Beauty">
+<meta property="og:description" content="Julia Vaskul, AI creative director based in Hendaye, France. Fully AI-generated fashion and beauty campaigns and films, held to the standards of a real shoot.">
 <meta property="og:image" content="https://juliavaskul.com/og.jpg?v=2">
+<meta property="og:image:alt" content="Julia Vaskul — AI Creative Director">
 <meta property="og:url" content="https://juliavaskul.com/">
 <meta name="twitter:card" content="summary_large_image">
+<!--/SEO-->
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#E8E5DF">
@@ -353,10 +359,10 @@ const DICT={
   formMissing:'Merci d’indiquer votre nom, votre e-mail et un message.',formOk:'Merci — je vous réponds très vite.',formErr:'Une erreur s’est produite — réessayez ou écrivez-moi directement.',
   cookieT:'Ce site utilise des cookies pour des statistiques de visite et des enregistrements de navigation anonymes, afin de savoir quels travaux sont consultés et comment le site est utilisé. Les champs de formulaire ne sont jamais enregistrés. Rien n’est partagé ni vendu.',accept:'Accepter',decline:'Refuser'}
 };
-let LANG=(()=>{try{const q=new URLSearchParams(location.search).get('lang');if(q==='fr'||q==='en'){localStorage.setItem('jv-lang',q);return q}const st=localStorage.getItem('jv-lang');if(st==='fr'||st==='en')return st}catch(e){}return (navigator.language||'').toLowerCase().startsWith('fr')?'fr':'en'})();
+let LANG=(()=>{try{const q=new URLSearchParams(location.search).get('lang');if(q==='fr'||q==='en'){localStorage.setItem('jv-lang',q);return q}if(/^\/fr(\/|$)/.test(location.pathname))return 'fr';const st=localStorage.getItem('jv-lang');if(st==='fr'||st==='en')return st}catch(e){}return (navigator.language||'').toLowerCase().startsWith('fr')?'fr':'en'})();
 let T=DICT[LANG];
 const brandLabel=b=>b==='Original design'?T.original:b;
-function setLang(l){LANG=l;T=DICT[l];try{localStorage.setItem('jv-lang',l)}catch(e){}applyChrome();track('lang_switch',{lang:l});route()}
+function setLang(l){LANG=l;T=DICT[l];try{localStorage.setItem('jv-lang',l)}catch(e){}applyChrome();track('lang_switch',{lang:l});route();document.querySelectorAll('a[data-k]').forEach(a=>a.setAttribute('href',keyToPath(a.dataset.k)))}
 function applyChrome(){document.documentElement.lang=LANG;
   document.querySelectorAll('[data-t]').forEach(el=>el.textContent=T[el.dataset.t]);
   document.querySelectorAll('.lang-b').forEach(b=>b.innerHTML=LANG==='en'?'<b>EN</b> <span class="mute">/ FR</span>':'<span class="mute">EN /</span> <b>FR</b>');
@@ -803,19 +809,41 @@ function vLegal(){
   ACTIVE=null;
 }
 
+/* ================= clean URLs (/fashion/still-water/, /fr/...) on top of the # router ================= */
+const SECTIONS=['fashion','beauty','film','contact','legal'];
+function pathToKey(p){const s=p.replace(/^\/fr(?=\/|$)/,'').split('/').filter(Boolean);
+  if(!s.length)return 'about';
+  if(s.length===1&&SECTIONS.includes(s[0]))return s[0];
+  if(s.length===2&&s[0]==='film'&&BY[s[1]])return 'film-'+s[1];
+  if(s.length===2&&(s[0]==='fashion'||s[0]==='beauty')&&BY[s[1]])return 'p-'+s[1];
+  return 'about'}
+function keyToPath(k){const pre=LANG==='fr'?'/fr':'';k=k||'about';
+  if(k==='about'||k==='home')return pre+'/';
+  if(SECTIONS.includes(k))return pre+'/'+k+'/';
+  if(k.startsWith('film-')&&BY[k.slice(5)])return pre+'/film/'+k.slice(5)+'/';
+  if(k.startsWith('p-')&&BY[k.slice(2)]){const x=BY[k.slice(2)];return pre+'/'+x.c+'/'+x.s+'/'}
+  return pre+'/'}
+function curKey(){return location.hash.length>1?location.hash.slice(1):pathToKey(location.pathname)}
+function syncUrl(k){const p=keyToPath(k);if(location.pathname!==p||location.hash){_rs(null,'',p+location.search);lastHash=location.hash}
+  const x=k.startsWith('p-')?BY[k.slice(2)]:k.startsWith('film-')?BY[k.slice(5)]:null;
+  document.title=x?`${x.t} — ${brandLabel(x.b)} · Julia Vaskul`:(LANG==='fr'?'Julia Vaskul — Directrice de création IA · Mode & Beauté':'Julia Vaskul — AI Creative Director · Fashion & Beauty')}
+function linkify(root){(root||document).querySelectorAll('a[href^="#"]').forEach(a=>{const k=a.getAttribute('href').slice(1);if(!k)return;a.dataset.k=k;a.setAttribute('href',keyToPath(k))})}
+new MutationObserver(ms=>{for(const m of ms)for(const n of m.addedNodes)if(n.nodeType===1){if(n.matches&&n.matches('a[href^="#"]'))linkify(n.parentNode);else linkify(n)}}).observe(document.documentElement,{childList:true,subtree:true});
+document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('a[data-k]');if(!a||e.defaultPrevented||e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;e.preventDefault();const k=a.dataset.k;if(curKey()===k&&!location.hash){route();return}location.hash='#'+k});
+
 /* ================= router ================= */
 const firstUrls=o=>[`m/dip/${o.d}_diptych-1.jpg`,`m/dip/${o.d}_diptych-2.jpg`,img(o.s,o.fr[0])];
 function whenLoaded(urls,max){return Promise.race([Promise.all(urls.map(u=>new Promise(z=>{const i=new Image();i.onload=i.onerror=()=>z();i.src=u;if(i.complete)z()}))),new Promise(z=>setTimeout(z,max))])}
 let RT=0;
 function route(){
-  const h0=location.hash.slice(1);const x0=h0.startsWith('p-')&&BY[h0.slice(2)];
+  const h0=curKey();const x0=h0.startsWith('p-')&&BY[h0.slice(2)];
   if(MOB()&&x0&&x0.c!=='film'){const t=++RT;whenLoaded(firstUrls(x0),1800).then(()=>{if(t===RT)_route()});return}
   RT++;_route();
 }
 function _route(){
   $('.lbx')?.remove();$('.proj')?.remove();LB=null;$('#menu').hidden=true;
   app.innerHTML='';ACTIVE=null;
-  const h=location.hash.slice(1)||'about';let r=h;
+  const h=curKey()||'about';let r=h;
   if(h==='about'||h==='home')vAbout(),r='about';
   else if(h==='fashion')vHome('fashion');
   else if(h==='beauty')vHome('beauty');
@@ -825,19 +853,21 @@ function _route(){
   else if(h==='contact')vContact();
   else if(h==='legal')vLegal(),r='';
   else {vAbout();r='about'}
+  syncUrl(h);
   document.querySelectorAll('.nav a[data-r]').forEach(a=>a.classList.toggle('on',a.dataset.r===r));
   track('$pageview',{$current_url:location.href,section:r||h});
 }
 let lastHash=location.hash;
 addEventListener('hashchange',()=>{if(location.hash===lastHash)return;lastHash=location.hash;route()});
-const _rs=history.replaceState.bind(history);history.replaceState=(a,b,u)=>{_rs(a,b,u);lastHash=location.hash};
+const _rs=history.replaceState.bind(history);history.replaceState=(a,b,u)=>{if(typeof u==='string'&&u[0]==='#')u=keyToPath(u.slice(1))+location.search;_rs(a,b,u);lastHash=location.hash};
+addEventListener('popstate',()=>{if(!location.hash){lastHash='';route()}});
 let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>ACTIVE&&ACTIVE.pos&&ACTIVE.pos(),120)});
 addEventListener('keydown',e=>{if($('.lbx')){if(e.key==='Escape'){LB=null;$('.lbx').remove()}if(e.key==='ArrowRight'&&LB){LB.i=(LB.i+1)%LB.list.length;drawLB()}if(e.key==='ArrowLeft'&&LB){LB.i=(LB.i-1+LB.list.length)%LB.list.length;drawLB()}return}if($('.proj'))return;!e.repeat&&ACTIVE&&ACTIVE.key&&ACTIVE.key(e.key)});
 $('#menuBtn').onclick=()=>{const m=$('#menu');m.hidden=!m.hidden;$('#menuBtn').setAttribute('aria-expanded',!m.hidden)};
 document.querySelectorAll('.lang-b').forEach(b=>b.addEventListener('click',()=>{$('#menu').hidden=true;setLang(LANG==='en'?'fr':'en')}));
 $('#menu').addEventListener('click',e=>{if(e.target.closest('a'))$('#menu').hidden=true});
 applyChrome();cookieBanner();
-route();
+route();linkify();
 </script>
 </body>
 </html>
